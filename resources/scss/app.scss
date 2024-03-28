@@ -1,0 +1,37 @@
+@import '~bootstrap/scss/bootstrap';
+
+body {
+    visibility: visible;
+    background-color: #edede9;
+}
+
+.card {
+    background-color: #f2e9e4;
+}
+
+html::-webkit-scrollbar {
+    width: 10px;
+}
+
+html::-webkit-scrollbar-track {
+    background: white;
+}
+
+html::-webkit-scrollbar-thumb {
+    background: rgba(42, 41, 41, 0.383);
+}
+
+.navbar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+main {
+    padding-top: 60px;
+}
+
+.card-body {
+    height: 400px;
+}
