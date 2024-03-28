@@ -27,7 +27,9 @@
                             Nessuno
                         @endforelse
                     </div>
-                    <div class="mt-4"><a href="{{route('guest.projects.show', $project->id)}}" class="btn btn-lg btn-primary"><i class="fa-solid fa-magnifying-glass me-2"></i>Vedi</a></div>
+                </div>
+                <div class="card-footer text-center">
+                    <a href="{{route('guest.projects.show', $project->id)}}" class="btn btn-lg btn-primary"><i class="fa-solid fa-magnifying-glass me-2"></i>Vedi</a>
                 </div>
             </div>
         </div>
