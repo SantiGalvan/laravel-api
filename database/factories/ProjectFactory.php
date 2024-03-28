@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
@@ -23,16 +24,18 @@ class ProjectFactory extends Factory
     {
 
         $title = fake()->text(20);
+        $slug = Str::slug($title);
 
         Storage::makeDirectory('project_images');
 
-        $img_url = Storage::putFileAs('project_images', fake()->image(null, 250, 250), "$title.png");
+        $img_url = Storage::putFileAs('project_images', fake()->image(null, 250, 250), "$slug.png");
 
         $type_ids = Type::pluck('id')->toArray();
         $type_ids[] = null;
 
         return [
             'title' => $title,
+            'slug' => $slug,
             'description' => fake()->paragraphs(10, true),
             'type_id' => Arr::random($type_ids),
             'framework' => fake()->word(),
