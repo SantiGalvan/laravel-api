@@ -31,7 +31,7 @@ class ProjectController extends Controller
      */
     public function show(string $slug)
     {
-        $project = Project::whereSlug($slug)->first();
+        $project = Project::whereSlug($slug)->with('type', 'technologies')->first();
 
         if (!$project) return response(null, 404);
 
