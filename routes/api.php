@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ProjectController;
+use App\Http\Controllers\Api\TechnologyProjectController;
 use App\Http\Controllers\Api\TypeProjectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,4 +24,8 @@ use Illuminate\Support\Facades\Route;
 Route::apiResource('projects', ProjectController::class)->only('index');
 Route::get('projects/{slug}', [ProjectController::class, 'show']);
 
+// Rotta per i progetti legati ad una tipologia
 Route::get('types/{slug}/projects', TypeProjectController::class);
+
+// Rotta per i progetti legati ad una tecnologia
+Route::get('technologies/{slug}/projects', TechnologyProjectController::class);
