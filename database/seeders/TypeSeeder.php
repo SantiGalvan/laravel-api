@@ -6,6 +6,7 @@ use App\Models\Type;
 use Faker\Generator;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class TypeSeeder extends Seeder
 {
@@ -41,6 +42,7 @@ class TypeSeeder extends Seeder
             $new_type = new Type();
 
             $new_type->description = $faker->paragraphs(10, true);
+            $new_type->slug = Str::slug($type['label']);
             $new_type->fill($type);
 
             $new_type->save();
