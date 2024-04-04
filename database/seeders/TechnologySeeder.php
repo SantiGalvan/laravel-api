@@ -6,6 +6,7 @@ use App\Models\Technology;
 use Faker\Generator;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class TechnologySeeder extends Seeder
 {
@@ -45,6 +46,7 @@ class TechnologySeeder extends Seeder
             $new_technology = new Technology();
 
             $new_technology->description = $faker->paragraphs(10, true);
+            $new_technology->slug = Str::slug($technology['label']);
             $new_technology->fill($technology);
 
             $new_technology->save();
