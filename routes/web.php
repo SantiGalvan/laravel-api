@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Guest\HomeController as GuestHomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
+use App\Http\Controllers\Admin\TechnologyController;
 use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Guest\ProjectController as GuestProjectController;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,7 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
     // Rotta Admin home
     Route::get('', AdminHomeController::class)->name('home');
 
+
     // Rotte per il cestino
     route::get('/projects/trash', [AdminProjectController::class, 'trash'])->name('projects.trash');
     route::patch('/projects/{project}/restore', [AdminProjectController::class, 'restore'])->name('projects.restore');
@@ -44,8 +46,10 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
     Route::put('/projects/{project}', [AdminProjectController::class, 'update'])->name('projects.update')->withTrashed();
     Route::delete('/projects/{project}', [AdminProjectController::class, 'destroy'])->name('projects.destroy');
 
-    // Rotta Admin project CRUD generale
+
+    // Rotta Admin project CRUD generale (resource)
     // Route::resource('projects', AdminProjectController::class);
+
 
     // Rotte per il cestino dei tipi
     route::get('/types/trash', [TypeController::class, 'trash'])->name('types.trash');
@@ -54,6 +58,15 @@ Route::prefix('/admin')->name('admin.')->middleware('auth')->group(function () {
 
     // Rotta Admin type CRUD generale
     Route::resource('types', TypeController::class)->withTrashed(['show', 'edit', 'update']);
+
+
+    // Rotte per il cestino dei tipi
+    route::get('/technologies/trash', [TechnologyController::class, 'trash'])->name('technologies.trash');
+    route::patch('/technologies/{technologie}/restore', [TechnologyController::class, 'restore'])->name('technologies.restore');
+    route::delete('/technologies/{technologie}/drop', [TechnologyController::class, 'drop'])->name('technologies.drop');
+
+    // Rotta Admin technology CRUD generale
+    Route::resource('technologies', TechnologyController::class)->withTrashed(['show', 'edit', 'update']);
 });
 
 Route::middleware('auth')->group(function () {
