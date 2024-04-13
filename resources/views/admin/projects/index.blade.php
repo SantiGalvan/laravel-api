@@ -34,14 +34,14 @@
                     <td>{{$project->title}}</td>
                     <td>
                       @if ($project->type)
-                        <span class="badge" style="background-color: {{$project->type->color}}">{{$project->type->label}}</span>
+                        <a href="{{route('admin.types.show', $project->type)}}" class="badge" style="background-color: {{$project->type->color}}">{{$project->type->label}}</a>
                       @else
                         Nessuno
                       @endif
                     </td>
                     <td>
                       @forelse ($project->technologies as $technology)
-                        <span class="badge rounded-pill" style="background-color: {{$technology->color}}">{{$technology->label}}</span>
+                        <a href="{{route('admin.technologies.show', $technology)}}" class="badge rounded-pill" style="background-color: {{$technology->color}}">{{$technology->label}}</a>
                       @empty
                         Nessuno
                       @endforelse
