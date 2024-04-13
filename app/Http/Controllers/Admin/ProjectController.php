@@ -145,6 +145,8 @@ class ProjectController extends Controller
             $project->image = $img_url;
         }
 
+        $project->slug = Str::slug($data['label']);
+
         $project->update($data);
 
         if (Arr::exists($data, 'technologies')) $project->technologies()->sync($data['technologies']);

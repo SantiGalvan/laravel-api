@@ -90,6 +90,8 @@ class TypeController extends Controller
 
         $data = $request->all();
 
+        $type->slug = Str::slug($data['label']);
+
         $type->update($data);
 
         return to_route('admin.types.show', $type->id)->with('type', 'success')->with('message', 'Tipo modificato');
