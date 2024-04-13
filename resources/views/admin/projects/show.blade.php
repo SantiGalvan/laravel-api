@@ -14,14 +14,14 @@
                     <div><strong>Ultima modifica:</strong> {{$project->updated_at}}</div>
                     <div><strong>Tipo:</strong>
                         @if ($project->type)
-                        <span class="badge" style="background-color: {{$project->type->color}}">{{$project->type->label}}</span>
+                        <a href="{{route('admin.types.show', $project->type)}}" class="badge rounded-pill" style="background-color: {{$project->type->color}}">{{$project->type->label}}</a>
                         @else
                         Nessuno
                         @endif 
                     </div>
                     <div class="mt-4"><strong>Linguaggio: </strong>
                         @forelse ($project->technologies as $technology)
-                            <span class="badge rounded-pill" style="background-color: {{$technology->color}}">{{$technology->label}}</span>
+                        <a href="{{route('admin.technologies.show', $technology)}}" class="badge rounded-pill" style="background-color: {{$technology->color}}">{{$technology->label}}</a>
                         @empty
                             Nessuno
                         @endforelse
