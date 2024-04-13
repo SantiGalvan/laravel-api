@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Technology;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 
 class TechnologyController extends Controller
@@ -76,7 +77,23 @@ class TechnologyController extends Controller
      */
     public function update(Request $request, Technology $technology)
     {
-        //
+        $request->validate([
+            'label' => ['required', 'string', Rule::unique('technologies')->ignore('technology_id')],
+            'color' => 'nullable|hex_color',
+            'description' => 'nullable|string'
+        ], [
+            'label.required' => 'Il nome del tipo è obbligatorio',
+            'label.unique' => 'Esiste già un tipo con questo nome',
+            'color.hex_color' => 'Codice colore errato'
+        ]);
+
+        $data = $request->all();
+
+        $technology->slug = Str::slug($data['label']);
+
+        $technology->update($data);
+
+        return to_route('admin.technologies.show', $technology->id)->with('type', 'success')->with('message', 'Linguaggio modificato');
     }
 
     /**
