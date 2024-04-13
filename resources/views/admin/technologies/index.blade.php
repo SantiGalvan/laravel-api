@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
-@section('title', 'Types')
+@section('title', 'Technologies')
 
 @section('content')
-    <section id="table-types">
+    <section id="table-technologies">
       <div class="d-flex align-items-center justify-content-between">
 
-        <a href="{{route('admin.types.create')}}" class="btn btn-secondary"><i class="fas fa-plus me-2"></i>Crea Linguaggio</a>
+        <a href="{{route('admin.technologies.create')}}" class="btn btn-secondary"><i class="fas fa-plus me-2"></i>Crea Linguaggio</a>
 
         <h1 class="my-4">Linguaggi</h1>
 
-        <a href="{{route('admin.types.trash')}}" class="btn btn-danger"><i class="fas fa-trash me-2"></i>Vai al cestino</a>
+        <a href="{{route('admin.technologies.trash')}}" class="btn btn-danger"><i class="fas fa-trash me-2"></i>Vai al cestino</a>
 
       </div>
 
