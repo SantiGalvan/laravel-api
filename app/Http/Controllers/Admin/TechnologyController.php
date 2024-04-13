@@ -65,4 +65,27 @@ class TechnologyController extends Controller
     {
         //
     }
+
+    // Trash
+    public function trash()
+    {
+        $technologies = Technology::onlyTrashed()->get();
+        return view('admin.technologies.trash', compact('technologies'));
+    }
+
+    public function restore(string $id)
+    {
+        $technology = Technology::onlyTrashed()->findOrFail($id);
+        $technology->restore();
+
+        return to_route('admin.technologies.index')->with('type', 'success')->with('message', 'Linguaggio ripristinato con successo');
+    }
+
+    public function drop(string $id)
+    {
+        $technology = Technology::onlyTrashed()->findOrFail($id);
+        $technology->forceDelete();
+
+        return to_route('admin.technologies.trash')->with('type', 'danger')->with('message', 'Linguaggio eliminato definitivamente');
+    }
 }
