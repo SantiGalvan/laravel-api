@@ -101,7 +101,9 @@ class TechnologyController extends Controller
      */
     public function destroy(Technology $technology)
     {
-        //
+        $technology->delete();
+
+        return to_route('admin.technologies.index')->with('type', 'danger')->with('message', "Linguaggio: $technology->label eliminato con successo");
     }
 
     // Trash
@@ -116,7 +118,7 @@ class TechnologyController extends Controller
         $technology = Technology::onlyTrashed()->findOrFail($id);
         $technology->restore();
 
-        return to_route('admin.technologies.index')->with('type', 'success')->with('message', 'Linguaggio ripristinato con successo');
+        return to_route('admin.technologies.index')->with('type', 'success')->with('message', "Linguaggio: $technology->label ripristinato con successo");
     }
 
     public function drop(string $id)
@@ -124,6 +126,6 @@ class TechnologyController extends Controller
         $technology = Technology::onlyTrashed()->findOrFail($id);
         $technology->forceDelete();
 
-        return to_route('admin.technologies.trash')->with('type', 'danger')->with('message', 'Linguaggio eliminato definitivamente');
+        return to_route('admin.technologies.trash')->with('type', 'danger')->with('message', "Linguaggio: $technology->label eliminato definitivamente");
     }
 }
