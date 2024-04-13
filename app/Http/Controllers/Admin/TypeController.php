@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 
 class TypeController extends Controller
 {
@@ -34,7 +35,7 @@ class TypeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'label' => 'required|string|unique',
+            'label' => 'required|string|unique:types',
             'color' => 'nullable|hex_color',
             'description' => 'nullable|string'
         ], [
@@ -48,6 +49,8 @@ class TypeController extends Controller
         $type = new Type();
 
         $type->fill($data);
+
+        $type->slug = Str::slug($data['label']);
 
         $type->save();
 
@@ -87,6 +90,8 @@ class TypeController extends Controller
 
         $data = $request->all();
 
+        $type->slug = Str::slug($data['label']);
+
         $type->update($data);
 
         return to_route('admin.types.show', $type->id)->with('type', 'success')->with('message', 'Tipo modificato');
@@ -102,6 +107,7 @@ class TypeController extends Controller
         return to_route('admin.types.index')->with('type', 'danger')->with('message', "Tipo: $type->label eliminato con successo");
     }
 
+    // Trash
     public function trash()
     {
         $types = Type::onlyTrashed()->get();
@@ -113,7 +119,7 @@ class TypeController extends Controller
         $type = Type::onlyTrashed()->findOrFail($id);
         $type->restore();
 
-        return to_route('admin.types.index')->with('type', 'success')->with('message', 'Tipo ripristinato con successo');
+        return to_route('admin.types.index')->with('type', 'success')->with('message', "Tipo: $type->label ripristinato con successo");
     }
 
     public function drop(string $id)
@@ -121,6 +127,6 @@ class TypeController extends Controller
         $type = Type::onlyTrashed()->findOrFail($id);
         $type->forceDelete();
 
-        return to_route('admin.types.trash')->with('type', 'danger')->with('message', 'Tipo eliminato definitivamente');
+        return to_route('admin.types.trash')->with('type', 'danger')->with('message', "Tipo: $type->label eliminato definitivamente");
     }
 }

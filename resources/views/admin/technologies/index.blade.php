@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
-@section('title', 'Types')
+@section('title', 'Technologies')
 
 @section('content')
-    <section id="table-types">
+    <section id="table-technologies">
       <div class="d-flex align-items-center justify-content-between">
 
-        <a href="{{route('admin.types.create')}}" class="btn btn-secondary"><i class="fas fa-plus me-2"></i>Crea Tipologia</a>
+        <a href="{{route('admin.technologies.create')}}" class="btn btn-secondary"><i class="fas fa-plus me-2"></i>Crea Linguaggio</a>
 
-        <h1 class="my-4">Tipologie</h1>
+        <h1 class="my-4">Linguaggi</h1>
 
-        <a href="{{route('admin.types.trash')}}" class="btn btn-danger"><i class="fas fa-trash me-2"></i>Vai al cestino</a>
+        <a href="{{route('admin.technologies.trash')}}" class="btn btn-danger"><i class="fas fa-trash me-2"></i>Vai al cestino</a>
 
       </div>
 
@@ -26,23 +26,23 @@
               </tr>
             </thead>
             <tbody class="table-group-divider">
-                @forelse ($types as $type)
+                @forelse ($technologies as $technology)
                 <tr>
-                    <th scope="row">{{$type->id}}</th>
-                    <td>{{$type->label}}</td>
+                    <th scope="row">{{$technology->id}}</th>
+                    <td>{{$technology->label}}</td>
                     <td>
                       <div class="d-flex align-items-center">
-                        {{$type->color}}
-                        <span class="rounded-color" style="background-color: {{$type->color}}"></span>
+                        {{$technology->color}}
+                        <span class="rounded-color" style="background-color: {{$technology->color}}"></span>
                       </div>
                     </td>
-                    <td>{{$type->created_at}}</td>
-                    <td>{{$type->updated_at}}</td>
+                    <td>{{$technology->created_at}}</td>
+                    <td>{{$technology->updated_at}}</td>
                     <td>
                         <div class="d-flex justify-content-end align-items-center gap-2">
-                            <a href="{{route('admin.types.show', $type->id)}}" class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></a>
-                            <a href="{{route('admin.types.edit', $type->id)}}" class="btn btn-sm btn-warning"><i class="fas fa-pencil"></i></a>
-                            <form action="{{route('admin.types.destroy', $type->id)}}" method="POST" class="delete-form">
+                            <a href="{{route('admin.technologies.show', $technology->id)}}" class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></a>
+                            <a href="{{route('admin.technologies.edit', $technology->id)}}" class="btn btn-sm btn-warning"><i class="fas fa-pencil"></i></a>
+                            <form action="{{route('admin.technologies.destroy', $technology->id)}}" method="POST" class="delete-form">
                                 @csrf
                                 @method('DELETE')
                                 <button class="btn btn-sm btn-danger"><i class="fas fa-trash-can"></i></button>
@@ -53,7 +53,7 @@
                 @empty
                   <tr>
                     <th colspan="6">
-                        <h3>Al momento non ci sono tipi</h3>
+                        <h3>Al momento non ci sono linguaggi</h3>
                     </th>
                 </tr>  
                 @endforelse
