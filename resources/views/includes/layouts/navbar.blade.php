@@ -24,6 +24,9 @@
                 <li class="nav-item">
                     <a class="nav-link @if(Request::is('admin/types*')) active @endif" href="{{route('admin.types.index') }}">Tipologie</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link @if(Request::is('admin/technologies*')) active @endif" href="{{route('admin.technologies.index') }}">Linguaggi</a>
+                </li>
                 @endauth
             </ul>
 
