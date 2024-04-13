@@ -162,7 +162,7 @@ class ProjectController extends Controller
     {
         $project->delete();
 
-        return to_route('admin.projects.index')->with('type', 'danger')->with('message', 'Progetto eliminato con successo');
+        return to_route('admin.projects.index')->with('type', 'danger')->with('message', "Progetto: $project->title eliminato con successo");
     }
 
     public function trash()
@@ -176,7 +176,7 @@ class ProjectController extends Controller
         $project = Project::onlyTrashed()->findOrFail($id);
         $project->restore();
 
-        return to_route('admin.projects.index')->with('type', 'success')->with('message', 'Progetto ripristinato con successo');
+        return to_route('admin.projects.index')->with('type', 'success')->with('message', "Progetto: $project->title ripristinato con successo");
     }
 
     public function drop(string $id)
@@ -188,6 +188,6 @@ class ProjectController extends Controller
 
         $project->forceDelete();
 
-        return to_route('admin.projects.trash')->with('type', 'danger')->with('message', 'Progetto eliminato definitivamente');
+        return to_route('admin.projects.trash')->with('type', 'danger')->with('message', "Progetto: $project->title eliminato definitivamente");
     }
 }
