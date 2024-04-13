@@ -11,6 +11,8 @@ class Technology extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $fillable = ['label', 'color', 'description'];
+
     public function projects()
     {
         return $this->belongsToMany(Project::class);
