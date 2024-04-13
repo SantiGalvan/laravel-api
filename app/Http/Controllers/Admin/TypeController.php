@@ -102,6 +102,7 @@ class TypeController extends Controller
         return to_route('admin.types.index')->with('type', 'danger')->with('message', "Tipo: $type->label eliminato con successo");
     }
 
+    // Trash
     public function trash()
     {
         $types = Type::onlyTrashed()->get();
