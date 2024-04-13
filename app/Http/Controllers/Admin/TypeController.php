@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 
 class TypeController extends Controller
 {
@@ -34,7 +35,7 @@ class TypeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'label' => 'required|string|unique',
+            'label' => 'required|string|unique:types',
             'color' => 'nullable|hex_color',
             'description' => 'nullable|string'
         ], [
@@ -48,6 +49,8 @@ class TypeController extends Controller
         $type = new Type();
 
         $type->fill($data);
+
+        $type->slug = Str::slug($data['label']);
 
         $type->save();
 

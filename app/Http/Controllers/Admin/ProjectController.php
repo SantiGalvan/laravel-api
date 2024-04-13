@@ -10,6 +10,7 @@ use App\Models\Type;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
@@ -73,6 +74,8 @@ class ProjectController extends Controller
             $img_url = Storage::putFileAs('project_image', $data['image'], "$project->title.$extension");
             $project->image = $img_url;
         }
+
+        $project->slug = Str::slug($data['title']);
 
         $project->save();
 
