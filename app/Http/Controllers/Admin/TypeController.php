@@ -119,7 +119,7 @@ class TypeController extends Controller
         $type = Type::onlyTrashed()->findOrFail($id);
         $type->restore();
 
-        return to_route('admin.types.index')->with('type', 'success')->with('message', 'Tipo ripristinato con successo');
+        return to_route('admin.types.index')->with('type', 'success')->with('message', "Tipo: $type->label ripristinato con successo");
     }
 
     public function drop(string $id)
@@ -127,6 +127,6 @@ class TypeController extends Controller
         $type = Type::onlyTrashed()->findOrFail($id);
         $type->forceDelete();
 
-        return to_route('admin.types.trash')->with('type', 'danger')->with('message', 'Tipo eliminato definitivamente');
+        return to_route('admin.types.trash')->with('type', 'danger')->with('message', "Tipo: $type->label eliminato definitivamente");
     }
 }
