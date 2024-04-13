@@ -30,7 +30,12 @@
                 <tr>
                     <th scope="row">{{$type->id}}</th>
                     <td>{{$type->label}}</td>
-                    <td>{{$type->color}}</td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        {{$type->color}}
+                        <span class="rounded-color" style="background-color: {{$type->color}}"></span>
+                      </div>
+                    </td>
                     <td>{{$type->created_at}}</td>
                     <td>{{$type->updated_at}}</td>
                     <td>

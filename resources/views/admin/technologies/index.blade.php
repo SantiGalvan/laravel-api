@@ -30,7 +30,12 @@
                 <tr>
                     <th scope="row">{{$technology->id}}</th>
                     <td>{{$technology->label}}</td>
-                    <td>{{$technology->color}}</td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        {{$technology->color}}
+                        <span class="rounded-color" style="background-color: {{$technology->color}}"></span>
+                      </div>
+                    </td>
                     <td>{{$technology->created_at}}</td>
                     <td>{{$technology->updated_at}}</td>
                     <td>
